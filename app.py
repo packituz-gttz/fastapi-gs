@@ -5,18 +5,16 @@ from fastapi import FastAPI
 app = FastAPI()
 
 
+import os
+
 @app.get("/")
 async def root():
-    message_file: str = 'message.txt'
-    message = ''
-    if os.path.exists(message_file):
-        with open(message_file) as file:
-            for line in file:
-                message = f'{message} {line}'
-    else:
-        message = 'default'
+    files = os.listdir('.')
+    return {
+        "files": files,
+        "current_directory": os.getcwd()
+    }
 
-    return {"message": f"Hello World {message}"}
 
 
 @app.get("/posts")
