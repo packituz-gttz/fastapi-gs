@@ -6,10 +6,10 @@ COPY ./requirements.txt /
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY ./app /app
-
 # Set the working directory in the container
-WORKDIR /app
+COPY . /sync/repo/
+
+WORKDIR /sync/repo/
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
