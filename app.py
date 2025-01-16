@@ -1,6 +1,7 @@
 import os.path
 
 from fastapi import FastAPI
+from content import utils
 
 app = FastAPI()
 
@@ -9,17 +10,16 @@ import os
 
 @app.get("/")
 async def root():
-    files = os.listdir('.')
+    files = os.listdir('./content/repo/')
     return {
         "files": files,
-        "current_directory": os.getcwd()
     }
 
 
 
 @app.get("/posts")
 async def get_posts():
-    return [{"id": 1, "title": "First Post", "content": "This is the content of the first post."}]
+    return utils.message()
 
 
 if __name__ == '__main__':
